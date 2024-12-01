@@ -8,8 +8,8 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/23Vvrangler/Examen-Parcial-De-DAD.git #Tu reposritorio
-          searchPaths: config-data #Crearemos esta carpeta
+          uri: https://github.com/23Vvrangler/Examen-Parcial-De-DAD.git #Reposritorio Github
+          searchPaths: config-data 
           default-label: main #Rama de tu repositorio
 
   security:
