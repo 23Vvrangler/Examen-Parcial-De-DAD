@@ -16,5 +16,5 @@ public class Producto {
     private Integer categoriaId;
 
     @Transient
-    private CategoriaDto CategoriaDto
+    private CategoriaDto CategoriaDto;
 }
