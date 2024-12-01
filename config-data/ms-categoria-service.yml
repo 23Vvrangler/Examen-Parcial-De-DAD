@@ -1,10 +1,11 @@
 server:
+  #port: 8082
   port: ${PORT:${SERVER_PORT:0}}
 springdoc:
   api-docs:
     enabled: true
   swagger-ui:
-    enable: true
+    enabled: true
     path: /doc/swagger-ui.html
 spring:
   jpa:
@@ -12,7 +13,7 @@ spring:
     generate-ddl: true
     show-sql: true
   datasource:
-    driverClasName: com.mysql.cl.jdbc.Driver
+    driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/dad-categoria
     username: root
     password:
@@ -20,6 +21,8 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: ${EUREKA_URI://localhost:1031/eureka}
+      #defaultZone: http://localhost:8090/eureka
+      defaultZone: ${EUREKA_URI:http://localhost:1031/eureka}
   instance:
+    #hostname: localhost
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
