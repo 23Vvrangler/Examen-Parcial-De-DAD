@@ -1,9 +1,7 @@
 package gwcl.com.ms_producto.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import gwcl.com.ms_producto.dto.CategoriaDto;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -14,4 +12,9 @@ public class Producto {
     private Integer id;
     private String gwclNombre;
     private String gwclProducto;
+
+    private Integer categoriaId;
+
+    @Transient
+    private CategoriaDto CategoriaDto
 }

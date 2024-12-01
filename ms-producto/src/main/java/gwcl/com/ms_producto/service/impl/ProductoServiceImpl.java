@@ -1,6 +1,8 @@
 package gwcl.com.ms_producto.service.impl;
 
+import gwcl.com.ms_producto.dto.CategoriaDto;
 import gwcl.com.ms_producto.entity.Producto;
+import gwcl.com.ms_producto.feign.CategoriaFeign;
 import gwcl.com.ms_producto.repository.ProductoRepository;
 import gwcl.com.ms_producto.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +15,19 @@ import java.util.Optional;
 public class ProductoServiceImpl implements ProductoService {
     @Autowired
     private ProductoRepository productoRepository;
+    @Autowired
+    private CategoriaFeign categoriaFeign;
 
     @Override
-    public List<Producto> lista() {
-        return productoRepository.findAll();
+    public List<Producto> lista(){
+        List<Producto> productos = productoRepository.findAll();
+        for (Producto producto : productos) {
+            if (producto.getCategoriaId() != null) {
+                CategoriaDto categoriaDto = categoriaFeign.buscarPorId(producto.getCategoriaId());
+                producto.setCategoriaDto(categoriaDto);
+            }
+        }
+        return productos;
     }
 
     @Override
@@ -26,7 +37,16 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Override
     public Optional<Producto> buscarPorId(Integer id) {
-        return productoRepository.findById(id);
+            Optional<Producto> productoOptional = productoRepository.findById(id);
+            if (productoOptional.isPresent()) {
+                Producto producto = productoOptional.get();
+                if (producto.getCategoriaId() != null) {
+                    CategoriaDto categoriaDto = categoriaFeign.buscarPorId(producto.getCategoriaId());
+                    producto.setCategoriaDto(categoriaDto);
+                }
+                return Optional.of(producto);
+            }
+            return Optional.empty();
     }
 
     @Override
