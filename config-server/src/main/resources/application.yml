@@ -10,7 +10,7 @@ spring:
         git:
           uri: https://github.com/23Vvrangler/Examen-Parcial-De-DAD.git #Reposritorio Github
           searchPaths: config-data 
-          default-label: main #Rama de tu repositorio
+          default-label: main #Rama deL repositorio
 
   security:
     user:
